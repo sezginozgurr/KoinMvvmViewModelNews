@@ -3,13 +3,9 @@ package com.example.corotinestest.ui.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.brkcnszgn.networkresponse.NetworkResponse
 import com.example.corotinestest.core.model.ErrorResponse
 import com.example.corotinestest.core.model.UserResponseModel
 import com.example.corotinestest.core.repository.UserRepository
-
-import kotlinx.coroutines.launch
 
 class UserViewModel(private val repository: UserRepository) : ViewModel() {
 
@@ -20,7 +16,7 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
     var loading = MutableLiveData<Boolean>()
 
 
-    suspend fun getUser() {
+/*    suspend fun getUser() {
 
         viewModelScope.launch {
             fetchUser()
@@ -48,5 +44,5 @@ class UserViewModel(private val repository: UserRepository) : ViewModel() {
 
             }
         }
-    }
+    }*/
 }

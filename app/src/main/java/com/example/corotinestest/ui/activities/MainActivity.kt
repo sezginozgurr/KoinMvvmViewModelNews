@@ -1,22 +1,11 @@
 package com.example.corotinestest.ui.activities
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatTextView
-import androidx.cardview.widget.CardView
 import com.example.corotinestest.R
 import com.example.corotinestest.core.model.UserResponseModelItem
 import com.example.corotinestest.ui.adapter.BaseAdapter
-import com.example.corotinestest.ui.adapter.ISetItemView
 import com.example.corotinestest.ui.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -29,16 +18,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        observerUserModel()
-        GlobalScope.launch {
+        //observerUserModel()
+/*        GlobalScope.launch {
             getUserViewModel.getUser()
-        }
+        }*/
 
-        setAdapter()
-        recycler.adapter = adapter
+        //setAdapter()
+        //recycler.adapter = adapter
     }
 
-    private fun setAdapter() {
+
+/*    private fun setAdapter() {
         adapter = BaseAdapter(this, R.layout.row_item_main_recycler, userList)
         adapter!!.setItemView(object : ISetItemView<UserResponseModelItem> {
             override fun setItemView(v: View?, item: UserResponseModelItem, position: Int) {
@@ -108,5 +98,5 @@ class MainActivity : AppCompatActivity() {
             adapter?.setList(it)
             println(it.toString())
         })
-    }
+    }*/
 }
