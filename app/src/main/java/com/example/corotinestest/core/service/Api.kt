@@ -3,6 +3,7 @@ package com.example.corotinestest.core.service
 
 import com.brkcnszgn.networkresponse.NetworkResponse
 import com.example.corotinestest.core.model.*
+import com.example.corotinestest.core.model.trnews.TurkeyNewsModel
 import retrofit2.http.GET
 
 open interface Api {
@@ -78,5 +79,8 @@ open interface Api {
 
     @GET("posts/1/comments")
     suspend fun getUserComment(): NetworkResponse<CommentResponseModel, ErrorResponse>
+
+    @GET("v2/top-headlines?country=tr&apiKey=3731ae5c419e41faa755f7a7d174fe60")
+    suspend fun getHomeNews(): NetworkResponse<TurkeyNewsModel, ErrorResponse>
 
 }

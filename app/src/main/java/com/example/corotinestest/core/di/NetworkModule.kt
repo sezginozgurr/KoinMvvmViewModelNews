@@ -3,6 +3,7 @@ package com.coroutine.core.di
 
 import com.brkcnszgn.networkresponse.NetworkResponseAdapterFactory
 import com.example.corotinestest.core.repository.DetailRepository
+import com.example.corotinestest.core.repository.HomePageRepository
 import com.example.corotinestest.core.repository.LastScreenRepository
 import com.example.corotinestest.core.repository.UserRepository
 import com.example.corotinestest.core.service.Api
@@ -58,7 +59,7 @@ val networkModule = module {
      */
     single {
         Retrofit.Builder()
-            .baseUrl("https://jsonplaceholder.typicode.com/")
+            .baseUrl("http://newsapi.org/")
             .client(get())
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(NetworkResponseAdapterFactory())
@@ -73,6 +74,7 @@ val networkModule = module {
     factory<UserRepository> { UserRepository(get()) }
     factory<DetailRepository> { DetailRepository(get()) }
     factory<LastScreenRepository> { LastScreenRepository(get()) }
+    factory<HomePageRepository> { HomePageRepository(get()) }
 //    factory<LoginRepository> { LoginRepository(get()) }
 //    factory<InterestRepository> { InterestRepository(get()) }
 //    factory<CreateChildRepository> { CreateChildRepository(get()) }

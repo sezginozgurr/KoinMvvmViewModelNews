@@ -2,6 +2,7 @@ package com.mtek.kidsvid.di
 
 
 import com.example.corotinestest.ui.viewmodel.DetailsViewModel
+import com.example.corotinestest.ui.viewmodel.HomePageViewModel
 import com.example.corotinestest.ui.viewmodel.LastScreenViewModel
 import com.example.corotinestest.ui.viewmodel.UserViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -18,6 +19,10 @@ val viewModelModule = module {
 
     viewModel {
         LastScreenViewModel(get())
+    }
+
+    viewModel {
+        HomePageViewModel(get())
     }
 //    viewModel {
 //        RegisterViewModel(get())
