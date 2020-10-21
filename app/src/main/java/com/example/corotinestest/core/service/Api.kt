@@ -6,7 +6,24 @@ import com.example.corotinestest.core.model.*
 import com.example.corotinestest.core.model.trnews.TurkeyNewsModel
 import retrofit2.http.GET
 
-open interface Api {
+ interface Api {
+
+    @GET("users")
+    suspend fun getUser(): NetworkResponse<UserResponseModel, ErrorResponse>
+
+    @GET("users/1/albums")
+    suspend fun getUserAlbum(): NetworkResponse<AlbumsResponseModel, ErrorResponse>
+
+    @GET("albums/1/photos")
+    suspend fun getUserPhotos(): NetworkResponse<PhotosResponseModel, ErrorResponse>
+
+    @GET("posts/1/comments")
+    suspend fun getUserComment(): NetworkResponse<CommentResponseModel, ErrorResponse>
+
+    @GET("v2/top-headlines?country=tr&apiKey=3731ae5c419e41faa755f7a7d174fe60")
+    suspend fun getHomeNews(): NetworkResponse<TurkeyNewsModel, ErrorResponse>
+
+ }
 
 //    @POST("kidsvid/auth/authenticate")
 //    suspend fun getUser(
@@ -67,20 +84,3 @@ open interface Api {
 //
 //    @GET("kidsvid/items/categories?filter[type][eq]=egitim&filter[parent_category][nnull]=\"\"&fields=*.*,icon.*,parent_category.*.*")
 //    suspend fun getCategories(): NetworkResponse<CategoriesModel, ErrorBody>
-
-    @GET("users")
-    suspend fun getUser(): NetworkResponse<UserResponseModel, ErrorResponse>
-
-    @GET("users/1/albums")
-    suspend fun getUserAlbum(): NetworkResponse<AlbumsResponseModel, ErrorResponse>
-
-    @GET("albums/1/photos")
-    suspend fun getUserPhotos(): NetworkResponse<PhotosResponseModel, ErrorResponse>
-
-    @GET("posts/1/comments")
-    suspend fun getUserComment(): NetworkResponse<CommentResponseModel, ErrorResponse>
-
-    @GET("v2/top-headlines?country=tr&apiKey=3731ae5c419e41faa755f7a7d174fe60")
-    suspend fun getHomeNews(): NetworkResponse<TurkeyNewsModel, ErrorResponse>
-
-}
