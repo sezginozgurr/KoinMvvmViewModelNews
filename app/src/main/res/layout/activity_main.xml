@@ -5,24 +5,44 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <fragment
-        android:id="@+id/nav_fragment"
-        android:name="androidx.navigation.fragment.NavHostFragment"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/nav_graph">
+        android:layout_height="wrap_content">
 
-    </fragment>
-    <!--    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:context=".ui.activities.MainActivity" />-->
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme" />
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayNewsCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabMode="auto"
+            app:tabSelectedTextColor="@color/colorAccent"
+            app:tabTextColor="@color/color1" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vpNewsCategory"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- <fragment
+         android:id="@+id/nav_fragment"
+         android:name="androidx.navigation.fragment.NavHostFragment"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         app:defaultNavHost="true"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:navGraph="@navigation/nav_graph">
+
+     </fragment>-->
 
 </LinearLayout>

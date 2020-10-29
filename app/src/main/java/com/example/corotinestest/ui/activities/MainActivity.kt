@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.corotinestest.R
 import com.example.corotinestest.core.model.UserResponseModelItem
 import com.example.corotinestest.ui.adapter.BaseAdapter
+import com.example.corotinestest.ui.adapter.CategoryNewsAdapter
+import com.example.corotinestest.ui.util.MockData
 import com.example.corotinestest.ui.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
@@ -18,15 +21,19 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        init()
         //observerUserModel()
 /*        GlobalScope.launch {
             getUserViewModel.getUser()
         }*/
-
-        //setAdapter()
-        //recycler.adapter = adapter
     }
 
+    private fun init() {
+        vpNewsCategory.adapter =
+            CategoryNewsAdapter(supportFragmentManager, MockData.getNewsCategoryFragment())
+        tabLayNewsCategory.setupWithViewPager(vpNewsCategory)
+
+    }
 
 /*    private fun setAdapter() {
         adapter = BaseAdapter(this, R.layout.row_item_main_recycler, userList)
