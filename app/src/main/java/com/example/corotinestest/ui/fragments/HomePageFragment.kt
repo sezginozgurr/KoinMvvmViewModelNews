@@ -8,12 +8,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.corotinestest.R
 import com.example.corotinestest.core.model.NewsCategoryTitleModel
 import com.example.corotinestest.core.model.trnews.Article
 import com.example.corotinestest.ui.adapter.BaseAdapter
+import com.example.corotinestest.ui.adapter.IOnRecyclerViewItemClickListener
 import com.example.corotinestest.ui.adapter.ISetItemView
-import com.example.corotinestest.ui.util.MockData
 import com.example.corotinestest.ui.viewmodel.HomePageViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home_page.*
@@ -26,11 +28,15 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     private var adapter: BaseAdapter<NewsCategoryTitleModel>? = null
     private var adapterNews: BaseAdapter<Article>? = null
     private var newsList: ArrayList<Article> = ArrayList()
+    val categoryList = mutableListOf<NewsCategoryTitleModel>()
+    private var navController: NavController? = null
     private val homeViewModel by viewModel<HomePageViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = Navigation.findNavController(view)
         setAdapter()
+        setList()
         observeNews()
         lifecycleScope.launch {
             homeViewModel.getHomeNews()
@@ -39,9 +45,21 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
 
     }
 
+    private fun setList() {
+        categoryList.add(NewsCategoryTitleModel("Sozcu", 0))
+        categoryList.add(NewsCategoryTitleModel("Cumhuriyet", 1))
+        categoryList.add(NewsCategoryTitleModel("Hurriyet", 2))
+        categoryList.add(NewsCategoryTitleModel("Milliyet", 3))
+        categoryList.add(NewsCategoryTitleModel("HaberTurk", 4))
+    }
+
     private fun setAdapter() {
-        val categoryList = MockData.getCategory() as ArrayList<NewsCategoryTitleModel>
-        adapter = BaseAdapter(requireContext(), R.layout.row_item_category, categoryList)
+
+        adapter = BaseAdapter(
+            requireContext(),
+            R.layout.row_item_category,
+            categoryList as ArrayList<NewsCategoryTitleModel>
+        )
         adapter!!.setItemView(object : ISetItemView<NewsCategoryTitleModel> {
             override fun setItemView(v: View?, item: NewsCategoryTitleModel, position: Int) {
                 val categorytitle = v!!.findViewById<TextView>(R.id.categoryTitle)
@@ -49,8 +67,28 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
             }
 
         })
+        adapter!!.setiOnRecyclerViewItemClickListener(object :
+            IOnRecyclerViewItemClickListener<NewsCategoryTitleModel> {
+            override fun onRecyclerItemListener(
+                v: View?,
+                item: NewsCategoryTitleModel,
+                position: Int
+            ) {
+                when (position) {
+                    0 -> navController?.navigate(R.id.action_homePageFragment_to_sozcuFragment)
+                    1 -> navController?.navigate(R.id.action_homePageFragment_to_cumhuriyetFragment)
+                    2 -> navController?.navigate(R.id.action_homePageFragment_to_hurriyetFragment)
+                    3 -> navController?.navigate(R.id.action_homePageFragment_to_milliyetFragment)
+                    4 -> navController?.navigate(R.id.action_homePageFragment_to_haberTurkFragment)
+                }
+            }
+        })
         recyclerCategory.adapter = adapter
         adapter!!.setList(categoryList)
+    }
+
+    fun ClickControl() {
+
     }
 
     private fun newsAdapter() {
@@ -62,12 +100,14 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
                 val newsTitle: TextView = v.findViewById(R.id.newsTitle)
                 val newsDetail: TextView = v.findViewById(R.id.newsDetail)
                 val newsPublish: TextView = v.findViewById(R.id.publishAt)
+                val company: TextView = v.findViewById(R.id.company)
 
                 Picasso.get().load(item.urlToImage).into(newsImage)
 
                 newsTitle.text = item.title
                 newsDetail.text = item.description
                 newsPublish.text = item.publishedAt
+                company.text = item.source.name
             }
 
         })

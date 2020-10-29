@@ -5,8 +5,9 @@ import com.brkcnszgn.networkresponse.NetworkResponse
 import com.example.corotinestest.core.model.*
 import com.example.corotinestest.core.model.trnews.TurkeyNewsModel
 import retrofit2.http.GET
+import retrofit2.http.Query
 
- interface Api {
+interface Api {
 
     @GET("users")
     suspend fun getUser(): NetworkResponse<UserResponseModel, ErrorResponse>
@@ -20,10 +21,11 @@ import retrofit2.http.GET
     @GET("posts/1/comments")
     suspend fun getUserComment(): NetworkResponse<CommentResponseModel, ErrorResponse>
 
-    @GET("v2/top-headlines?country=tr&apiKey=3731ae5c419e41faa755f7a7d174fe60")
-    suspend fun getHomeNews(): NetworkResponse<TurkeyNewsModel, ErrorResponse>
+    @GET("v2/top-headlines?country=tr")
 
- }
+    suspend fun getHomeNews(@Query("apiKey") apiKey: String): NetworkResponse<TurkeyNewsModel, ErrorResponse>
+
+}
 
 //    @POST("kidsvid/auth/authenticate")
 //    suspend fun getUser(
