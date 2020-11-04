@@ -7,19 +7,16 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.example.corotinestest.R
 import com.example.corotinestest.core.model.NewsCategoryTitleModel
 import com.example.corotinestest.core.model.trnews.Article
 import com.example.corotinestest.ui.adapter.BaseAdapter
-import com.example.corotinestest.ui.adapter.IOnRecyclerViewItemClickListener
 import com.example.corotinestest.ui.adapter.ISetItemView
 import com.example.corotinestest.ui.viewmodel.HomePageViewModel
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_home_page.*
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -35,13 +32,14 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
-        setAdapter()
-        setList()
-        observeNews()
-        lifecycleScope.launch {
-            homeViewModel.getHomeNews()
-        }
+        //setAdapter()
         newsAdapter()
+        setList()
+        //  observeNews()
+//        lifecycleScope.launch {
+//            homeViewModel.getHomeNews()
+//        }
+        // newsAdapter()
 
     }
 
@@ -53,7 +51,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         categoryList.add(NewsCategoryTitleModel("HaberTurk", 4))
     }
 
-    private fun setAdapter() {
+    /*private fun setAdapter() {
 
         adapter = BaseAdapter(
             requireContext(),
@@ -85,7 +83,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
         })
         recyclerCategory.adapter = adapter
         adapter!!.setList(categoryList)
-    }
+    }*/
 
     fun ClickControl() {
 
@@ -111,7 +109,7 @@ class HomePageFragment : Fragment(R.layout.fragment_home_page) {
             }
 
         })
-        recyclerHomeNews.adapter = adapterNews
+        recyclerHomeNews?.adapter = adapterNews
 
     }
 

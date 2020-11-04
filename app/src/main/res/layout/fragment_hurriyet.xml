@@ -5,12 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.HurriyetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Zibab"
+        android:text="Hurriyet"
         android:textSize="30sp" />
 
 </FrameLayout>

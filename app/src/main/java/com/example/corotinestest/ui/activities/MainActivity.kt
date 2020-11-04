@@ -6,14 +6,14 @@ import com.example.corotinestest.R
 import com.example.corotinestest.core.model.UserResponseModelItem
 import com.example.corotinestest.ui.adapter.BaseAdapter
 import com.example.corotinestest.ui.adapter.CategoryNewsAdapter
-import com.example.corotinestest.ui.util.MockData
+import com.example.corotinestest.ui.fragments.*
 import com.example.corotinestest.ui.viewmodel.UserViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-
+    private lateinit var adapterw: CategoryNewsAdapter
     private val getUserViewModel by viewModel<UserViewModel>()
     private var adapter: BaseAdapter<UserResponseModelItem>? = null
     private var userList: ArrayList<UserResponseModelItem> = ArrayList()
@@ -21,19 +21,33 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        init()
+        adapterw = CategoryNewsAdapter(supportFragmentManager)
+        adapterw.apply {
+            addFragment(CumhuriyetFragment(), "Cumhuriyet")
+            addFragment(HaberTurkFragment(), "Haber Turk")
+            addFragment(HurriyetFragment(), "Hurriyet")
+            addFragment(MilliyetFragment(), "Milliyet")
+            addFragment(SozcuFragment(), "Sozcu")
+        }
+        vpNewsCategory.adapter = adapterw
+        tabLayNewsCategory.setupWithViewPager(vpNewsCategory)
+        tabLayNewsCategory.getTabAt(0)?.setIcon(R.drawable.ic_sabah)
+        tabLayNewsCategory.getTabAt(1)?.setIcon(R.drawable.sozcu)
+        tabLayNewsCategory.getTabAt(2)?.setIcon(R.drawable.sozcu)
+        tabLayNewsCategory.getTabAt(3)?.setIcon(R.drawable.sozcu)
+        tabLayNewsCategory.getTabAt(4)?.setIcon(R.drawable.sozcu)
         //observerUserModel()
 /*        GlobalScope.launch {
             getUserViewModel.getUser()
         }*/
     }
 
-    private fun init() {
+/*    private fun init() {
         vpNewsCategory.adapter =
             CategoryNewsAdapter(supportFragmentManager, MockData.getNewsCategoryFragment())
         tabLayNewsCategory.setupWithViewPager(vpNewsCategory)
 
-    }
+    }*/
 
 /*    private fun setAdapter() {
         adapter = BaseAdapter(this, R.layout.row_item_main_recycler, userList)
